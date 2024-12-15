@@ -4,6 +4,7 @@ import './index.css';
 import SignIn from './pages/SignIn';
 import Dashboard from './pages/Dashboard';
 import Posts from './pages/Posts';
+import Items from './pages/Items';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
 
@@ -11,7 +12,7 @@ ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<Posts />} />
+        <Route path='/' element={<Items />} />
         <Route path='/dashBoard' element={<Dashboard />} />
       </Routes>
     </BrowserRouter>

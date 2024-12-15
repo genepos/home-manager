@@ -1,0 +1,10 @@
+.title{
+    width: 100%;
+    box-shadow: 0px 3px 2px gray;
+}
+
+.contents{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0% 5%;
+}

@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardHeader from '@mui/material/CardHeader';
@@ -6,16 +7,18 @@ import { TextField, Button } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
 import '../css/PostContent.css';
 function PostContent() {
-    const postDate = '2024/12/20'
-    const title = 'テストテストテスト';
-    const content = 'テストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテスト';
-    const posterInitial = 'テ'
+    const postContent = {
+        postDate: '2024/12/20',
+        title: 'テストテストテスト',
+        content: 'テストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテスト',
+        posterInitial: 'テ'
+    }
     return (
             <Card className='Card_post'>
-                <CardHeader className='CardContent_header' title={title} subheader={postDate}
+                <CardHeader className='CardContent_header' title={postContent.title} subheader={postContent.postDate}
                         avatar={
                             <Avatar className='Avatar' aria-label="recipe">
-                              {posterInitial}
+                              {postContent.posterInitial}
                             </Avatar>
                           }
                 >
@@ -28,7 +31,7 @@ function PostContent() {
                     alt='NO IMAGE'
                     className='CardContent_image'/>
                 <CardContent className='CardContent_content'>
-                    <p>{content}</p>
+                    <p>{postContent.content}</p>
                 </CardContent>
             </Card>
     );
