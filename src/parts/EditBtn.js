@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Modal } from '@mui/material';
 import EditModal from "../parts/EditModal";
 
-function EditBtn() {
+function EditBtn(data) {
     const [isOpen, setIsOpen] = useState(false);
     const handleOpenModal = () => setIsOpen(true);
     const handleCloseModal = () => setIsOpen(false);
@@ -16,7 +16,7 @@ function EditBtn() {
             </Button>
 
             <Modal open={isOpen} onClose={handleCloseModal}>
-                <EditModal handleCloseModal={handleCloseModal} />
+                <EditModal data={data} handleCloseModal={handleCloseModal} />
             </Modal>
         </>
     );
