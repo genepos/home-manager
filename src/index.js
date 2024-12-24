@@ -1,9 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import SignIn from './pages/SignIn';
 import Dashboard from './pages/Dashboard';
-import Posts from './pages/Posts';
 import Items from './pages/Items';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
