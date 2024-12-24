@@ -1,13 +1,14 @@
 import * as React from 'react';
-import DeletBtn from '../parts/DeleteBtn'
-import EditBtn from '../parts/EditBtn'
+import DeletBtn from '../parts/DeleteBtn';
+import EditBtn from '../parts/EditBtn';
 import { DataGrid, GridColDef, GridRowsProp, GridToolbar, onSelectionModelChange} from '@mui/x-data-grid';
-
+import DataUtils from '../DataUtils';
 import '../css/Items.css';
+import zaikoData from "../zaiko_data/zaiko.json"
 
 function Items() {
-    const title = 'おうちの在庫';
 
+    const title = 'おうちの在庫';
     const columns = [
         { field: 'id', headerName: 'ID', type: 'number', width: 70 },
         { field: 'name', headerName: '名前', width: 200 },
@@ -24,14 +25,8 @@ function Items() {
          },
         { field: 'memo', headerName: 'メモ', width: 500 },
     ];
-    
-    const rows = [
-        { id: 1, name: 'シャンプー', value: 2, memo: '残り少ない'},
-        { id: 2, name: 'リンス', value: 3, memo: ''},
-        { id: 3, name: '歯磨き粉', value: 1, memo: 'かわにゃ'},
-        { id: 4, name: '洗剤', value: 3, memo: ''},
-        { id: 5, name: 'おむつ', value: 10, memo: ''},
-    ];
+
+    const rows = DataUtils.createRows(zaikoData);
   
     const paginationModel = { page: 0, pageSize: 10 };
 
