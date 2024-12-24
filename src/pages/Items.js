@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { TextField, Button } from '@mui/material';
-import { DataGrid } from '@mui/x-data-grid';
+import DeletBtn from '../parts/DeleteBtn'
+import EditBtn from '../parts/EditBtn'
+import { DataGrid, GridColDef, GridRowsProp, GridToolbar, GridEditModes} from '@mui/x-data-grid';
 
 import '../css/Items.css';
 
@@ -8,9 +10,19 @@ function Items() {
     const title = 'おうちの在庫';
   
     const columns = [
-        { field: 'id', headerName: 'ID', width: 70 },
+        { field: 'id', headerName: 'ID', type: 'number', width: 70 },
         { field: 'name', headerName: '名前', width: 200 },
         { field: 'value', headerName: 'ストック',type: 'number', width: 90 },
+        {
+          field: 'edit',
+          headerName: '更新',
+          renderCell: () => ( <EditBtn/>),
+         },
+        {
+          field: 'delete',
+          headerName: '削除',
+          renderCell: () => ( <DeletBtn/>),
+         },
         { field: 'memo', headerName: 'メモ', width: 500 },
     ];
     
@@ -30,19 +42,15 @@ function Items() {
          <h1>{title}</h1>
         </div>
 
-        <div className='filter'>
-          <TextField id="outlined-basic" label="キーワード" variant="outlined" />
-          <Button variant="contained">検索</Button>
-        </div>
-
         <div className='contents'>
         <DataGrid
             rows={rows}
             columns={columns}
             initialState={{ pagination: { paginationModel } }}
-            pageSizeOptions={[5, 10]}
-            checkboxSelection
+            pageSizeOptions={[20, 100]}
             sx={{ border: 0 }}
+            editMode='row'
+            slots={{ toolbar: GridToolbar }}
         />
         </div>
 
