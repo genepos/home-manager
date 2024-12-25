@@ -1,0 +1,25 @@
+.inputName{
+    margin: 30%;
+}
+
+.inputStock{
+    margin: 10%;
+}
+
+.input{
+    padding: 1%;
+}
+
+.inputBottom{
+    padding: 1%;
+}
+
+.addBtn{
+    margin-right: 20vh;
+}
+
+.modalTitle{
+    margin: 2%;
+    border: 5px, solid, black;
+}
+

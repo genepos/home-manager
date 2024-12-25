@@ -1,10 +1,12 @@
 import * as React from 'react';
 import DeletBtn from '../parts/DeleteBtn';
 import EditBtn from '../parts/EditBtn';
-import { DataGrid, GridColDef, GridRowsProp, GridToolbar, onSelectionModelChange} from '@mui/x-data-grid';
+import { DataGrid, GridToolbar} from '@mui/x-data-grid';
 import DataUtils from '../DataUtils';
 import '../css/Items.css';
 import zaikoData from "../zaiko_data/zaiko.json"
+import AddBtn from '../parts/AddBtn';
+import "../css/AddBtn.css"
 
 function Items() {
 
@@ -35,7 +37,9 @@ function Items() {
         <div className='title'>
          <h1>{title}</h1>
         </div>
-
+        <div className='menu'>
+          <AddBtn/>
+        </div>
         <div className='contents'>
         <DataGrid
             rows={rows}

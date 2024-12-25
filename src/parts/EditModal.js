@@ -2,7 +2,6 @@ import { Button, Typography, Box } from "@mui/material";
 
 function EditModal({ data,handleCloseModal }){
     const modalData = data.data
-    console.log(modalData);
     return (
         <Box
         sx={{
