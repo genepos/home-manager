@@ -18,6 +18,9 @@ exports.createRows = function(file){
     return array;
 }
 
-
-
+/** 在庫管理行データ削除 */
+exports.deleteRows = function(id,data){
+    const newArray = data.filter((item) => item.id != id);
+    return newArray;
+}
 

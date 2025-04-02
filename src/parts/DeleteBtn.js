@@ -1,14 +1,15 @@
 import { Button } from '@mui/material';
+import DataUtils from '../DataUtils';
 
-
-function DeleteBtn() {
+function DeleteBtn({target,data}) {
 
     return (
         <Button
         variant="contained"
         color="error"
         onClick={(e) => {
-            console.log('削除click');
+            // 削除アクション
+            DataUtils.deleteRows(target,data);
             e.stopPropagation();
             e.preventDefault();
         }}>

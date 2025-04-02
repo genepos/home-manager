@@ -11,6 +11,7 @@ import "../css/AddBtn.css"
 function Items() {
 
     const title = 'おうちの在庫';
+    const rows = DataUtils.createRows(zaikoData);
     const columns = [
         { field: 'id', headerName: 'ID', type: 'number', width: 70 },
         { field: 'name', headerName: '名前', width: 200 },
@@ -23,12 +24,10 @@ function Items() {
         {
           field: 'delete',
           headerName: '削除',
-          renderCell: () => ( <DeletBtn/>),
+          renderCell: (param) => ( <DeletBtn target={param.row.id} data={rows}/>),
          },
         { field: 'memo', headerName: 'メモ', width: 500 },
     ];
-
-    const rows = DataUtils.createRows(zaikoData);
   
     const paginationModel = { page: 0, pageSize: 10 };
 
