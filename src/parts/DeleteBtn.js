@@ -1,5 +1,5 @@
 import { Button } from '@mui/material';
-import DataUtils from '../DataUtils';
+import DataUtils from '../utility/DataUtils';
 
 function DeleteBtn({target,data}) {
 
