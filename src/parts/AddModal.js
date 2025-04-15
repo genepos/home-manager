@@ -1,6 +1,6 @@
 import { Button, Typography, Box, TextField } from "@mui/material";
 import "../css/AddModal.css";
-import { collection, addDoc } from 'firebase/firestore';
+import { collection, addDoc, setDoc } from 'firebase/firestore';
 import { db } from '../utility/firebase';
 import * as React from 'react';
 
@@ -18,6 +18,8 @@ function EditModal({ handleCloseModal }){
             stock: stock,
             memo: memo
           });
+          // docRef.id を使って、id フィールドを追加！
+          await setDoc(docRef, { id: docRef.id }, { merge: true });
           console.log('追加したドキュメントID: ', docRef.id);
         } catch (e) {
           console.error('エラー: ', e);
