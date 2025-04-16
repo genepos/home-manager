@@ -53,7 +53,7 @@ function Items() {
   const title = 'おうちの在庫';
   const columns = [
     { field: 'name', headerName: '名前', width: 200 },
-    { field: 'value', headerName: 'ストック',type: 'number', width: 90 },
+    { field: 'stock', headerName: 'ストック', width: 90 },
     {
       field: 'edit',
       headerName: '更新',
