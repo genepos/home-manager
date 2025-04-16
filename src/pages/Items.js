@@ -18,31 +18,23 @@ function Items() {
   const [rows, setRows] = useState([]);
   const handleOpenModal = () => setIsOpen(true);
 
-  // AddModalにデータ更新後に呼ばれる関数を渡す
+  /** モーダル制御 */
   const handleCloseModal = async () => {
     setIsOpen(false);
     // モーダル閉じた後、データを再取得して画面を更新
     const data = await fetchItems();
     setRows(data); // ここで状態更新
   };
-  const title = 'おうちの在庫';
-  const columns = [
-    { field: 'name', headerName: '名前', width: 200 },
-    { field: 'value', headerName: 'ストック',type: 'number', width: 90 },
-    {
-      field: 'edit',
-      headerName: '更新',
-      renderCell: (param) => ( <EditBtn data={param.row}/>),
-    },
-    {
-      field: 'delete',
-      headerName: '削除',
-      renderCell: (param) => ( <DeletBtn target={param.row.id} data={rows}/>),
-    },
-    { field: 'memo', headerName: 'メモ', width: 500 },
-  ];
 
-  // Storeからデータ取得
+  /** ボタン押下制御 */
+  const handleFetchData = async () => {
+    console.log("更新");
+    // データを再取得して画面を更新
+    const data = await fetchItems();
+    setRows(data); // ここで状態更新
+  };
+
+  /** Storeからデータ取得 */
   const fetchItems = async () => {
     const querySnapshot = await getDocs(collection(db, 'items'));
     const data = querySnapshot.docs.map(doc => {
@@ -58,6 +50,28 @@ function Items() {
     return data;
   };
 
+  const title = 'おうちの在庫';
+  const columns = [
+    { field: 'name', headerName: '名前', width: 200 },
+    { field: 'value', headerName: 'ストック',type: 'number', width: 90 },
+    {
+      field: 'edit',
+      headerName: '更新',
+      renderCell: (param) => ( <EditBtn data={param.row}/>),
+    },
+    {
+      field: 'delete',
+      headerName: '削除',
+      renderCell: (param) => ( 
+      <DeletBtn 
+        targetId={param.row.id} 
+        onDeleted={async () => {
+        const data = await fetchItems();
+        setRows(data);
+      }}/>),
+    },
+    { field: 'memo', headerName: 'メモ', width: 500 },
+  ];
 
   // データ取得
   useEffect(() => {
