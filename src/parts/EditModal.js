@@ -20,10 +20,9 @@ function EditModal({ data, handleCloseModal }) {
         value: stock,
         memo,
       });
-      console.log("更新成功✨");
       handleCloseModal(); // モーダル閉じる
     } catch (error) {
-      console.error("更新エラー😢", error);
+      console.error("更新エラー", error);
     }
   };
 
