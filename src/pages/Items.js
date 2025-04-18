@@ -8,6 +8,7 @@ import { db } from '../utility/firebase';
 import '../css/Items.css';
 import { Modal } from '@mui/material';
 import AddModal from "../parts/AddModal";
+import EditModal from "../parts/EditModal";
 import { Button } from '@mui/material';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 
@@ -17,21 +18,36 @@ function Items() {
   const [isOpen, setIsOpen] = useState(false);
   const [rows, setRows] = useState([]);
   const handleOpenModal = () => setIsOpen(true);
+  const [isEditOpen, setIsEditOpen] = useState(false);
+  const [editData, setEditData] = useState(null);
 
   /** モーダル制御 */
   const handleCloseModal = async () => {
     setIsOpen(false);
     // モーダル閉じた後、データを再取得して画面を更新
     const data = await fetchItems();
-    setRows(data); // ここで状態更新
+    setRows(data);
+  };
+
+  /** 編集モーダル制御 */ 
+  const handleOpenEditModal = (data) => {
+  // モーダルに渡すデータ
+  setEditData(data);
+  setIsEditOpen(true);
+  };
+
+  /** 編集後再取得制御 */
+  const handleCloseEditModal = async () => {
+    setIsEditOpen(false);
+    const updatedItems = await fetchItems();
+    setRows(updatedItems);
   };
 
   /** ボタン押下制御 */
   const handleFetchData = async () => {
-    console.log("更新");
     // データを再取得して画面を更新
     const data = await fetchItems();
-    setRows(data); // ここで状態更新
+    setRows(data);
   };
 
   /** Storeからデータ取得 */
@@ -57,7 +73,12 @@ function Items() {
     {
       field: 'edit',
       headerName: '更新',
-      renderCell: (param) => ( <EditBtn data={param.row}/>),
+      renderCell: (params) => (
+        <EditBtn
+        data={params.row}
+        onEdit={handleOpenEditModal}
+      />
+      ),
     },
     {
       field: 'delete',
@@ -97,6 +118,9 @@ function Items() {
           </Button>
           <Modal open={isOpen} onClose={handleCloseModal}>
                 <AddModal handleCloseModal={handleCloseModal} />
+          </Modal>
+          <Modal open={isEditOpen} onClose={handleCloseEditModal}>
+            <EditModal data={{ data: editData }} handleCloseModal={handleCloseEditModal} />
           </Modal>
         </div>
         <div className='contents'>
