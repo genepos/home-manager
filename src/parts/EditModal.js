@@ -13,11 +13,44 @@ function EditModal({ data, handleCloseModal }) {
 
   // 更新処理
   const handleUpdate = async () => {
+    const sanitizeInput = (input) => {
+      const tagPattern = /<\/?[^>]+(>|$)/g;
+      return !tagPattern.test(input);
+    };    
+    // 名前チェック
+    if (name.trim() === "") {
+      alert("名前が入力されていません。");
+      return;
+    }
+    if (name.length > 100) {
+      alert("名前は100文字以内で入力してください。");
+      return;
+    }
+    if (!sanitizeInput(name)) {
+      alert("名前にHTMLタグが含まれています。");
+      return;
+    }
+          
+    // ストックチェック
+    if (stock === "" || isNaN(Number(stock))) {
+      alert("ストックに数値以外が入力されています。");
+      return;
+    }
+          
+    // メモチェック
+    if (memo.length > 200) {
+      alert("メモは200文字以内で入力してください。");
+      return;
+    }
+    if (!sanitizeInput(memo)) {
+      alert("メモにHTMLタグが含まれています。");
+      return;
+    }
     try {
       const targetDoc = doc(db, "items", modalData.id);
       await updateDoc(targetDoc, {
         name,
-        value: stock,
+        value: Number(stock),
         memo,
       });
       handleCloseModal(); // モーダル閉じる
